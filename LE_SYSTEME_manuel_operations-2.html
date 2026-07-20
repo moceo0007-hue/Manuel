@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LE SYSTÈME — Manuel d'opérations · Agence IA Rétention E-commerce</title>
+<style>
+:root{
+  --noir:#0C0E11; --carte:#14171C; --carte2:#1A1E24;
+  --or:#D9B45B; --or-fonce:#8F7430;
+  --sarcelle:#3FBFAE; --corail:#E8705F;
+  --texte:#E8E4DA; --muted:#8F8A7B; --ligne:#262B33;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--noir);color:var(--texte);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.65;font-size:16px}
+.wrap{max-width:880px;margin:0 auto;padding:0 22px}
+a{color:var(--sarcelle);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--or);outline-offset:2px}
+
+/* HERO */
+header{border-bottom:1px solid var(--ligne);padding:64px 0 40px}
+.eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.22em;color:var(--or);text-transform:uppercase;margin-bottom:18px}
+h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(38px,6vw,58px);line-height:1.05;font-weight:700;letter-spacing:-.01em}
+h1 em{font-style:italic;color:var(--or)}
+.sub{color:var(--muted);margin-top:16px;max-width:640px;font-size:17px}
+.verite{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ligne);border:1px solid var(--ligne);margin-top:36px}
+.verite div{background:var(--carte);padding:18px 16px}
+.verite .n{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:26px;color:var(--sarcelle);display:block}
+.verite .l{font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;display:block}
+@media(max-width:640px){.verite{grid-template-columns:1fr}}
+
+/* SOMMAIRE */
+nav{padding:28px 0;border-bottom:1px solid var(--ligne)}
+nav ol{list-style:none;columns:2;column-gap:40px}
+@media(max-width:640px){nav ol{columns:1}}
+nav li{margin-bottom:8px;break-inside:avoid}
+nav a{color:var(--texte);font-size:15px}
+nav .m{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--or);font-size:12.5px;margin-right:10px}
+
+/* SECTIONS */
+section{padding:52px 0;border-bottom:1px solid var(--ligne)}
+h2{font-family:Georgia,'Times New Roman',serif;font-size:clamp(26px,3.6vw,34px);font-weight:700;line-height:1.15;margin-bottom:6px}
+.mod{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;letter-spacing:.2em;color:var(--or);text-transform:uppercase;display:block;margin-bottom:10px}
+h3{font-size:18.5px;font-weight:600;margin:32px 0 10px;color:var(--or)}
+p{margin-bottom:14px}
+p.lead{font-size:17.5px;color:var(--texte)}
+ul.liste{margin:0 0 16px 20px}
+ul.liste li{margin-bottom:8px}
+strong{color:#fff}
+.small{font-size:13.5px;color:var(--muted)}
+
+/* BLOCS */
+.script{background:var(--carte);border:1px solid var(--ligne);border-left:3px solid var(--sarcelle);padding:18px 20px;margin:16px 0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.8px;line-height:1.7;white-space:pre-wrap;color:#DDD8CC}
+.script .tag{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sarcelle);margin-bottom:10px;font-weight:700}
+.realite{background:rgba(232,112,95,.06);border:1px solid rgba(232,112,95,.35);border-left:3px solid var(--corail);padding:16px 20px;margin:18px 0}
+.realite .tag{font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--corail);display:block;margin-bottom:8px;font-weight:700}
+.action{background:linear-gradient(135deg,rgba(217,180,91,.10),rgba(217,180,91,.04));border:1px solid var(--or-fonce);padding:20px 22px;margin:26px 0 4px}
+.action .tag{font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--or);display:block;margin-bottom:12px;font-weight:700}
+.action label{display:flex;gap:10px;align-items:flex-start;margin-bottom:9px;cursor:pointer;font-size:15px}
+.action input{accent-color:var(--or);margin-top:4px;flex-shrink:0}
+
+/* TABLES */
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px}
+th{font-family:ui-monospace,monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:left;padding:10px 12px;border-bottom:2px solid var(--or-fonce)}
+td{padding:10px 12px;border-bottom:1px solid var(--ligne);vertical-align:top}
+td.num{font-family:ui-monospace,monospace;color:var(--sarcelle);white-space:nowrap}
+tr.total td{border-top:2px solid var(--or-fonce);color:var(--or);font-weight:700}
+.tablewrap{overflow-x:auto}
+
+footer{padding:44px 0 70px;color:var(--muted);font-size:14px}
+@media print{body{background:#fff;color:#111}.script{color:#111;background:#f5f5f5}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Manuel d'opérations · E-commerce FR · Rétention IA · 2026</div>
+    <h1>LE SYSTÈME.<br>La formation à 5 000 €, <em>sans les 5 000 €.</em></h1>
+    <p class="sub">Tout ce que les programmes type Elite Round Table vendent — positionnement, acquisition, scripts, vente, livraison, scaling — réécrit de zéro et adapté à ta situation exacte : agence IA de rétention pour marques e-commerce françaises, budget 4 000 €, zéro réseau, zéro track record.</p>
+    <div class="verite">
+      <div><span class="n">0 €</span><span class="l">Prix de ce manuel</span></div>
+      <div><span class="n">~180 €/mois</span><span class="l">Coût réel des outils</span></div>
+      <div><span class="n">1 variable</span><span class="l">Le volume que TU exécutes</span></div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <ol>
+      <li><span class="m">M0</span><a href="#m0">La vérité avant de commencer</a></li>
+      <li><span class="m">M1</span><a href="#m1">Positionnement &amp; cible</a></li>
+      <li><span class="m">M2</span><a href="#m2">L'offre à 3 étages</a></li>
+      <li><span class="m">M3</span><a href="#m3">La machine d'acquisition</a></li>
+      <li><span class="m">M4</span><a href="#m4">La vente — script &amp; objections</a></li>
+      <li><span class="m">M5</span><a href="#m5">La livraison — le produit</a></li>
+      <li><span class="m">M6</span><a href="#m6">Admin, contrat, micro-entreprise</a></li>
+      <li><span class="m">M7</span><a href="#m7">Scaling 0 → 10K → 30K</a></li>
+      <li><span class="m">M8</span><a href="#m8">Plan 90 jours + KPI</a></li>
+      <li><span class="m">AX</span><a href="#ax">Budget : allocation des 4 000 €</a></li>
+    </ol>
+  </div>
+</nav>
+
+<section id="m0">
+  <div class="wrap">
+    <span class="mod">Module 0</span>
+    <h2>La vérité avant de commencer</h2>
+    <p class="lead">Ce que contiennent réellement les programmes à 4-5K$ (ERT de Brez Scales inclus) : un framework de positionnement, des scripts d'outreach DM + cold email, un process de vente high-ticket, du personal branding, et une communauté. C'est tout. Le contenu représente ~20 % de la valeur. Les 80 % restants, c'est la pression sociale du groupe qui te force à exécuter. Ce manuel te donne les 20 %. Les 80 %, personne ne peut te les vendre.</p>
+
+    <h3>Différence clé avec le modèle Brez</h3>
+    <p>Brez vend le modèle « paid ads pour marques e-com » — un marché saturé depuis 2022, où des milliers d'élèves des mêmes formations se battent sur les mêmes prospects. Toi, tu attaques la <strong>rétention et le post-achat</strong> des marques e-com françaises : moins concurrentiel, mesurable au centime près, et vendable à la performance sans budget pub à risquer. Ton modèle est structurellement meilleur pour quelqu'un qui part de zéro.</p>
+
+    <div class="realite">
+      <span class="tag">Chiffres réels — pas ceux des pages de vente</span>
+      <p>À 6 mois, avec exécution sérieuse (outreach quotidien, pas d'excuses) : <strong>médiane 8-15K € MRR</strong>. Très bonne exécution : <strong>plafond 25-35K €</strong>. Les 50-100K € promis par les formations : <strong>~1 % de probabilité</strong>. Et la stat que personne n'affiche : la majorité des acheteurs de formations à 5K ne signent jamais un seul client — pas parce que le contenu est faux, mais parce qu'ils n'envoient jamais rien.</p>
+    </div>
+
+    <h3>Les 3 règles du manuel</h3>
+    <ul class="liste">
+      <li><strong>Règle 70/30.</strong> Pendant 90 jours : 70 % de ton temps en prospection et vente, 30 % en livraison et setup. Pas l'inverse. Un logo, un site parfait, un « rebranding » = de la procrastination déguisée.</li>
+      <li><strong>Règle du volume.</strong> Chaque métrique de ce manuel suppose du volume réel. 10 emails ne prouvent rien. 300 envois minimum avant de juger un message.</li>
+      <li><strong>Règle de la preuve.</strong> Sans track record, ta preuve = le mini-audit vidéo personnalisé (M3) + l'offre à la performance (M2). Pas une Lambo de location.</li>
+    </ul>
+
+    <div class="action">
+      <span class="tag">À faire avant de lire la suite — aujourd'hui</span>
+      <label><input type="checkbox"> Bloquer 2 créneaux fixes/jour dans ton agenda : 9h-12h prospection, 14h-16h calls/livraison.</label>
+      <label><input type="checkbox"> Envoyer les 10 premiers DM (script M3) à des marques trouvées via la Bibliothèque publicitaire Meta — avant toute autre tâche de ce manuel.</label>
+    </div>
+  </div>
+</section>
+
+<section id="m1">
+  <div class="wrap">
+    <span class="mod">Module 1</span>
+    <h2>Positionnement &amp; cible</h2>
+    <p class="lead">Le framework de positionnement des formations à 5K tient en une phrase : une cible précise + un problème mesurable + un mécanisme + un modèle de paiement qui enlève le risque. Voici le tien, prêt à l'emploi.</p>
+
+    <div class="script"><span class="tag">Ton positionnement — mot à mot</span>« J'aide les marques e-commerce françaises (Shopify / WooCommerce) à récupérer le chiffre d'affaires qu'elles perdent après le premier achat — paniers abandonnés, clients qui ne recommandent jamais, zéro avis — avec des systèmes de rétention automatisés par IA. Payé principalement à la performance : si le système ne génère rien de mesurable, vous ne payez quasiment rien. »</div>
+
+    <h3>Ton client idéal (ICP)</h3>
+    <div class="tablewrap"><table>
+      <tr><th>Critère</th><th>Cible</th><th>Pourquoi</th></tr>
+      <tr><td>CA mensuel</td><td class="num">30K – 300K €</td><td>En dessous : pas de budget. Au-dessus : agence en place + cycles longs.</td></tr>
+      <tr><td>Type</td><td>DTC, fondateur accessible, 1-10 employés</td><td>Le fondateur décide seul, en un call.</td></tr>
+      <tr><td>Verticales</td><td>Cosmétique, compléments, mode, maison, food</td><td>Réachat naturel élevé = la rétention paie vite.</td></tr>
+      <tr><td>Signal n°1</td><td>Pubs actives (Bibliothèque publicitaire Meta)</td><td>Ils paient cher l'acquisition → chaque client perdu leur coûte double.</td></tr>
+      <tr><td>Signal n°2</td><td>Rien ne se passe après achat/inscription</td><td>Test : inscris-toi à leur newsletter, achète un petit produit. Silence = prospect parfait.</td></tr>
+      <tr><td>Signal n°3</td><td class="num">&lt; 50 avis produits</td><td>Preuve qu'aucun système de collecte n'existe.</td></tr>
+    </table></div>
+
+    <h3>Pourquoi cette niche gagne en 2026</h3>
+    <ul class="liste">
+      <li>Le coût d'acquisition Meta/TikTok monte chaque année → la marge se fait sur le <strong>réachat</strong>, que 80 % des petites marques FR n'exploitent pas.</li>
+      <li>Résultat <strong>mesurable au centime</strong> dans Klaviyo/Brevo → tu peux facturer à la performance, chose impossible en « branding ».</li>
+      <li>Les milliers d'élèves SMMA attaquent tous les ads. Presque personne ne vend la rétention à la performance en français.</li>
+    </ul>
+
+    <div class="action">
+      <span class="tag">À faire — Semaine 1</span>
+      <label><input type="checkbox"> Construire une liste de 100 marques FR correspondant à l'ICP (méthode M3).</label>
+      <label><input type="checkbox"> T'inscrire aux newsletters de 20 d'entre elles + acheter 1-2 petits produits : tes futurs audits se rédigent tout seuls.</label>
+    </div>
+  </div>
+</section>
+
+<section id="m2">
+  <div class="wrap">
+    <span class="mod">Module 2</span>
+    <h2>L'offre à 3 étages</h2>
+    <p class="lead">Le « Grand Slam Offer » que les formations enseignent = une promesse forte + un renversement du risque + une raison d'agir maintenant. Ta version, calibrée pour closer sans aucune référence :</p>
+
+    <div class="tablewrap"><table>
+      <tr><th>Étage</th><th>Prix</th><th>Contenu</th><th>Rôle</th></tr>
+      <tr><td><strong>1. PILOTE Performance</strong></td><td class="num">490 € setup<br>+ 15 % du CA récupéré / 60 j</td><td>2 flows prioritaires (panier abandonné + post-achat), tracking, rapport final</td><td>Ouvre la porte sans track record. Le client risque 490 €, pas 5 000.</td></tr>
+      <tr><td><strong>2. SYSTÈME</strong></td><td class="num">1 500 € setup<br>+ 490 €/mois</td><td>Les 5 flows complets (M5), segmentation, rapport mensuel</td><td>Conversion naturelle du pilote réussi.</td></tr>
+      <tr><td><strong>3. PARTENAIRE</strong></td><td class="num">990 – 1 490 €/mois</td><td>Tout + tests A/B continus, campagnes, support client IA, priorité</td><td>Le MRR qui construit ton agence.</td></tr>
+    </table></div>
+
+    <h3>Le renversement de risque — ta vraie arme</h3>
+    <div class="script"><span class="tag">Formulation exacte en call</span>« Mon modèle est simple : 490 € pour le setup, et ensuite je ne gagne que si vous gagnez — 15 % du chiffre que les flows génèrent, mesuré directement dans votre outil, pendant 60 jours. Si le système ne récupère rien, vous aurez perdu 490 € et moi 3 semaines de travail. C'est moi qui porte le risque, pas vous. »</div>
+
+    <h3>Définir « CA récupéré » — à verrouiller par écrit</h3>
+    <ul class="liste">
+      <li><strong>Définition :</strong> revenu attribué par Klaviyo/Brevo aux flows et campagnes que TU as créés (fenêtre d'attribution standard de l'outil, ex. 5 j après clic / 2 j après ouverture).</li>
+      <li><strong>Plafond :</strong> propose un cap si le client hésite (ex. « max 2 000 € de commission sur le pilote ») — ça rassure et ça coûte rarement.</li>
+      <li><strong>Lecture partagée :</strong> le client garde l'accès à son dashboard → zéro débat sur les chiffres.</li>
+    </ul>
+
+    <div class="realite">
+      <span class="tag">Erreur classique</span>
+      <p>Négocier le % avant d'avoir prouvé quoi que ce soit. Sur les 3 premiers clients, accepte presque tout (10 %, un cap bas, même 0 € de setup si le prospect est parfait). Tu n'achètes pas du revenu, tu achètes <strong>3 case studies</strong> — l'actif qui te permettra de doubler tes prix au mois 4 (M7).</p>
+    </div>
+
+    <div class="action">
+      <span class="tag">À faire — Semaine 1</span>
+      <label><input type="checkbox"> Rédiger ta grille tarifaire sur une page (les 3 étages, tels quels).</label>
+      <label><input type="checkbox"> Créer le contrat pilote d'une page à partir des 7 clauses du M6.</label>
+    </div>
+  </div>
+</section>
+
+<section id="m3">
+  <div class="wrap">
+    <span class="mod">Module 3</span>
+    <h2>La machine d'acquisition</h2>
+    <p class="lead">Le cœur de ce que Brez vend : outreach DM Instagram + cold email, en volume. Voici la version complète — stack, ciblage, warmup, scripts mot à mot, et les métriques qui te disent si ça marche ou si tu dois pivoter.</p>
+
+    <h3>Le stack (≈ 150-200 €/mois, tout compris)</h3>
+    <div class="tablewrap"><table>
+      <tr><th>Outil</th><th>Usage</th><th>Coût</th></tr>
+      <tr><td>2 domaines de prospection (ex. essaie-tamarque.fr)</td><td>Protéger ton domaine principal</td><td class="num">~25 €/an</td></tr>
+      <tr><td>2-3 boîtes mail (Google Workspace ou via Instantly)</td><td>Envoi — 20-30 emails/boîte/jour max au départ</td><td class="num">~14 €/mois</td></tr>
+      <tr><td>Instantly.ai</td><td>Warmup + séquences + suivi des réponses</td><td class="num">~40 €/mois</td></tr>
+      <tr><td>Store Leads (ou scraping manuel gratuit)</td><td>Lister les boutiques Shopify FR par trafic/CA estimé</td><td class="num">0 – 50 €/mois</td></tr>
+      <tr><td>Dropcontact ou Hunter</td><td>Trouver l'email du fondateur (RGPD-friendly pour le B2B)</td><td class="num">~30 €/mois</td></tr>
+      <tr><td>Loom (plan gratuit suffit)</td><td>Mini-audits vidéo de 3 min</td><td class="num">0 €</td></tr>
+      <tr><td>Claude</td><td>Personnalisation des messages, rédaction des audits</td><td class="num">~20-60 €/mois</td></tr>
+    </table></div>
+    <p class="small">Instagram/LinkedIn : gratuits, depuis TON compte perso rendu crédible (bio claire, 3-4 posts sur la rétention e-com). Le DM part de toi, pas d'un outil — l'automatisation de DM fait bannir les comptes.</p>
+
+    <h3>Construire la liste (50 prospects qualifiés / jour)</h3>
+    <ul class="liste">
+      <li><strong>Source 1 — Bibliothèque publicitaire Meta :</strong> filtre France, mots-clés par verticale (« sérum », « collagène », « bijoux »...). Toute marque qui paie des pubs = prospect chaud.</li>
+      <li><strong>Source 2 — Store Leads / MyIP.ms :</strong> boutiques Shopify .fr classées par trafic. Vise le segment moyen, pas le top 100.</li>
+      <li><strong>Source 3 — TikTok Shop FR &amp; marketplaces créateurs :</strong> marques jeunes, fondateurs ultra-accessibles en DM.</li>
+      <li><strong>Qualification (30 sec/marque) :</strong> pubs actives ? avis &lt; 50 ? newsletter silencieuse ? Si 2/3 → dans la liste avec : nom du fondateur, IG, email, 1 détail personnalisable.</li>
+    </ul>
+
+    <h3>Warmup — non négociable</h3>
+    <p>14 jours de warmup automatique (Instantly) avant le premier envoi réel, sinon tout part en spam et tes domaines sont grillés pour des mois. Pendant ces 14 jours : DM Instagram à la main. C'est exactement le temps qu'il faut pour tes 10 premiers audits Loom.</p>
+
+    <h3>Séquence cold email — 4 messages, mot à mot</h3>
+    <div class="script"><span class="tag">Email 1 · Jour 1 · Objet : question sur [Marque]</span>Bonjour [Prénom],
+
+Je me suis inscrit à la newsletter de [Marque] la semaine dernière et j'ai commandé [produit] — [détail sincère en 1 ligne : « le packaging est vraiment propre »].
+
+Constat côté client : après l'achat, il ne se passe rien. Pas de relance, pas de séquence réachat, pas de demande d'avis. Pour une marque qui paie des pubs Meta, c'est en général 15 à 25 % de CA qui dort.
+
+Je monte des systèmes de rétention IA pour des marques e-com françaises, payés surtout à la performance.
+
+Ouvert à ce que je vous montre en 15 min où ça fuit exactement chez vous ?
+
+[Ton prénom]
+[Téléphone] · [Site une page]</div>
+
+    <div class="script"><span class="tag">Email 2 · Jour 4 · Réponse au même fil</span>[Prénom] — plutôt que d'expliquer, je vous ai enregistré un audit vidéo de 3 minutes sur [Marque] : ce qui manque après l'achat, et ce que ça représente en € par mois avec votre trafic actuel.
+
+Je vous l'envoie ici ?</div>
+
+    <div class="script"><span class="tag">Email 3 · Jour 8 · L'offre chiffrée</span>[Prénom], dernier élément concret :
+
+Mon modèle sur un premier projet : 490 € de mise en place, puis 15 % uniquement sur le chiffre que les flows génèrent, mesuré dans votre outil, pendant 60 jours. Si ça ne produit rien, ça s'arrête là.
+
+Deux flows installés en 7 jours (relance panier + post-achat). Vous gardez tous les accès.
+
+Ça vaut un appel de 15 minutes cette semaine ? Deux créneaux : [X] ou [Y].</div>
+
+    <div class="script"><span class="tag">Email 4 · Jour 13 · Break-up</span>[Prénom], je clos le fil — je ne relancerai plus.
+
+Si la rétention devient une priorité un jour : l'audit vidéo de [Marque] reste valable, il suffit de répondre « ok » à cet email.
+
+Bonne continuation avec [Marque].</div>
+
+    <h3>Scripts DM Instagram (à la main, 20-30/jour)</h3>
+    <div class="script"><span class="tag">DM 1 · Ouverture</span>Salut [Prénom] 👋 tombé sur [Marque] via vos pubs — [compliment précis, pas de flatterie vide]. Question directe : vous avez quoi en place après l'achat (relance panier, réachat, avis) ? Je bosse là-dessus pour des marques e-com FR, payé à la performance.</div>
+    <div class="script"><span class="tag">DM 2 · S'il répond (même « pas grand-chose »)</span>C'est le cas de 80 % des marques que je regarde. Je vous fais un audit vidéo de 3 min sur [Marque] — gratuit, sans call derrière — qui montre les 2-3 fuites principales et ce qu'elles représentent en €. Je l'envoie ici ou par mail ?</div>
+    <div class="script"><span class="tag">DM 3 · Sans réponse · J+4</span>[Prénom] — j'ai fait l'audit quand même (3 min). Il montre ~[X] €/mois qui dorment entre le panier abandonné et l'absence de séquence réachat. Je l'envoie ?</div>
+
+    <h3>Le mini-audit Loom — ta preuve à 0 €</h3>
+    <ul class="liste">
+      <li><strong>Structure (3 min max) :</strong> 0:00 écran sur leur site « voilà ce que vit votre client » → 1:00 les 2-3 fuites (panier, post-achat, avis) → 2:00 le calcul simple : trafic estimé × taux × panier moyen = € qui dorment → 2:40 « si vous voulez, on installe ça en 7 jours, payé à la performance ».</li>
+      <li><strong>Volume :</strong> 5-10 Looms/jour pour les prospects qui ont montré un signe de vie. Jamais en premier message de masse.</li>
+      <li>Claude te rédige le script de chaque Loom en 2 min à partir de ta visite du site. Toi, tu enregistres.</li>
+    </ul>
+
+    <h3>Métriques — tes seuils de décision</h3>
+    <div class="tablewrap"><table>
+      <tr><th>Canal / volume mensuel</th><th>Attendu</th><th>Seuil d'alerte</th></tr>
+      <tr><td>Email · 1 000 envois</td><td class="num">Ouverture 45-65 % · Réponse 3-8 % · 5-15 calls</td><td>Réponse &lt; 2 % après 300 envois → change l'angle du message, pas l'outil</td></tr>
+      <tr><td>DM Instagram · 400-600 envois</td><td class="num">Réponse 10-20 % · 8-15 convos qualifiées · 4-8 calls</td><td>Réponse &lt; 8 % → ton profil ou ton ouverture ne sont pas crédibles</td></tr>
+      <tr><td>Calls → pilotes</td><td class="num">Closing 20-30 %</td><td>&lt; 15 % sur 10 calls → problème d'offre ou de script (M4), pas de prospection</td></tr>
+    </table></div>
+
+    <div class="action">
+      <span class="tag">Quota quotidien — sans quoi rien d'autre ne compte</span>
+      <label><input type="checkbox"> 50 nouveaux prospects qualifiés ajoutés à la liste</label>
+      <label><input type="checkbox"> 20-30 DM Instagram envoyés à la main</label>
+      <label><input type="checkbox"> 40-60 cold emails partis (après les 14 j de warmup)</label>
+      <label><input type="checkbox"> 5+ audits Loom pour les prospects tièdes/chauds</label>
+    </div>
+  </div>
+</section>
+
+<section id="m4">
+  <div class="wrap">
+    <span class="mod">Module 4</span>
+    <h2>La vente — script &amp; objections</h2>
+    <p class="lead">Ton point faible déclaré, donc le module le plus scripté. Un call = 30 minutes, 4 phases, et tu proposes le pilote À LA FIN DU CALL, pas « dans une proposition ». Les propositions envoyées par mail meurent dans les boîtes de réception.</p>
+
+    <h3>Structure du call (30 min)</h3>
+    <div class="script"><span class="tag">Phase 1 · Cadre · 3 min</span>« Merci pour le temps [Prénom]. Je propose un truc simple : 10-12 minutes où je comprends comment [Marque] fonctionne aujourd'hui, ensuite je vous montre exactement ce que j'installerais et comment je suis payé. À la fin, c'est oui, non, ou pas maintenant — les trois réponses me vont. Ça vous va ? »</div>
+    <div class="script"><span class="tag">Phase 2 · Discovery · 12 min — les 7 questions, dans l'ordre</span>1. « Vous faites environ quel CA mensuel, pour que je calibre ? »
+2. « Aujourd'hui, quel % de ce CA vient de l'email / SMS ? » (S'il ne sait pas → excellent signe pour toi.)
+3. « Vous utilisez quoi ? Klaviyo, Brevo, Mailchimp, rien ? »
+4. « Concrètement, il se passe quoi dans les 30 jours après un premier achat ? »
+5. « Vous connaissez votre taux de réachat ? Votre panier moyen ? »
+6. « Combien vous dépensez en pubs pour ACQUÉRIR un client ? »
+7. « Si je récupère 10-15 % de CA en plus sans toucher à vos pubs, ça change quoi pour vous cette année ? »</div>
+    <div class="script"><span class="tag">Phase 3 · Mécanisme + offre · 8 min</span>« Voilà ce que je vois : vous payez [X] € pour faire entrer un client, et il ressort par la porte de derrière parce que rien ne le retient. Ce que j'installe en 7 jours : [les 2 flows prioritaires selon ses réponses]. Chaque euro généré est tracé dans votre outil — vous gardez tous les accès.
+
+Le modèle : 490 € de mise en place, puis 15 % du chiffre attribué aux flows pendant 60 jours. Si ça ne génère rien, vous avez perdu 490 € et moi trois semaines. Le risque est de mon côté. »</div>
+    <div class="script"><span class="tag">Phase 4 · Close · 5 min</span>« Question directe : est-ce qu'il y a une raison de ne pas tester ça sur 60 jours ? »
+[Silence. Tu laisses le silence travailler.]
+Si oui → « Parfait. Je vous envoie le contrat d'une page et le lien de paiement dans l'heure. Il me faut [accès listés M5] et on démarre lundi. »
+Si hésitation → traiter l'objection (ci-dessous), puis reposer la même question.</div>
+
+    <h3>Les 10 objections — réponses exactes</h3>
+    <div class="tablewrap"><table>
+      <tr><th>Objection</th><th>Ta réponse</th></tr>
+      <tr><td>« T'as quel âge ? »</td><td>« 18. C'est exactement pour ça que je suis payé à la performance : mon âge ne vous coûte rien, seuls les résultats comptent. Et je réponds en 2 h, pas en 5 jours ouvrés. »</td></tr>
+      <tr><td>« Vous avez des références ? »</td><td>« Pas encore — c'est pour ça que le pilote existe et que vous risquez 490 € au lieu de 5 000. Dans 60 jours, vous SEREZ la référence, et vous aurez eu le tarif de lancement. »</td></tr>
+      <tr><td>« On a déjà Klaviyo. »</td><td>« Parfait, l'outil est payé — il est juste sous-exploité. Je ne vends pas l'outil, je vends le système dedans. L'audit de votre compte est gratuit : si tout est déjà bien fait, je vous le dis et on en reste là. »</td></tr>
+      <tr><td>« On a déjà une agence. »</td><td>« Qui gère vos ads, j'imagine ? Je ne touche pas aux ads. Je récupère le CA APRÈS le clic qu'ils font payer. Les deux s'additionnent. »</td></tr>
+      <tr><td>« Pas le budget. »</td><td>« C'est 490 € une fois, pas un retainer. Et le reste, vous ne le payez que sur du chiffre nouveau, déjà encaissé. Le pilote s'autofinance ou il s'arrête. »</td></tr>
+      <tr><td>« Envoyez une proposition. »</td><td>« Tout tient sur une page — je vous la partage à l'écran maintenant, ça prend 3 minutes et vous pourrez poser vos questions en direct. » (Ne JAMAIS raccrocher sur une promesse de PDF.)</td></tr>
+      <tr><td>« On le fera en interne. »</td><td>« C'est possible, comptez 2-3 semaines de travail pour quelqu'un chez vous. Ma question : ça fait combien de mois que c'est "prévu" ? Le pilote coûte moins cher qu'une semaine de salaire. »</td></tr>
+      <tr><td>« L'IA va écrire n'importe quoi. »</td><td>« L'IA rédige, moi je valide chaque message, et VOUS validez avant mise en ligne. Rien ne part sans votre accord sur le pilote. »</td></tr>
+      <tr><td>« C'est quoi la garantie ? »</td><td>« La structure du deal EST la garantie : je ne gagne quasiment que si vous gagnez. Aucune agence à 3 000 €/mois ne vous proposera ça. »</td></tr>
+      <tr><td>« Rappelez dans 6 mois. »</td><td>« Ok. Juste pour comprendre : c'est le timing, ou le sujet ne vous intéresse pas ? [Si timing] Ces 6 mois vont vous coûter environ [calcul de l'audit] €. Je note pour [mois], et je vous laisse l'audit vidéo d'ici là. »</td></tr>
+    </table></div>
+
+    <div class="realite">
+      <span class="tag">Règle absolue</span>
+      <p>Le paiement du setup se fait AVANT le début du travail. Un « client » qui ne paie pas 490 € ne paiera jamais 15 %. Lien de paiement (Stripe) envoyé dans l'heure qui suit le call, contrat d'une page joint. Pas de paiement sous 72 h = relance unique, puis prospect suivant.</p>
+    </div>
+
+    <div class="action">
+      <span class="tag">Entraînement — avant ton premier vrai call</span>
+      <label><input type="checkbox"> 5 calls de simulation avec Claude en mode « fondateur e-com sceptique » (objections aléatoires).</label>
+      <label><input type="checkbox"> Enregistre-toi. Réécoute. Tu dois tenir les 30 min sans lire.</label>
+    </div>
+  </div>
+</section>
+
+<section id="m5">
+  <div class="wrap">
+    <span class="mod">Module 5</span>
+    <h2>La livraison — le produit</h2>
+    <p class="lead">Ce que les formations survolent le plus (elles vendent l'acquisition, pas le métier). Voici les 5 flows qui produisent 90 % du résultat, le process en 7 jours, et le rôle exact de ta machine multi-agents.</p>
+
+    <h3>Les 5 flows standards</h3>
+    <div class="tablewrap"><table>
+      <tr><th>Flow</th><th>Déclencheur / cadence</th><th>Impact CA typique</th></tr>
+      <tr><td><strong>1. Panier abandonné</strong></td><td>1 h · 24 h · 72 h (email + SMS si dispo)</td><td class="num">+3-8 %</td></tr>
+      <tr><td><strong>2. Post-achat</strong></td><td>J0 confirmation enrichie · J3 usage/conseils · J10 cross-sell</td><td class="num">+2-5 %</td></tr>
+      <tr><td><strong>3. Winback</strong></td><td>J45 « on vous a gardé ça » · J75 dernière offre</td><td class="num">+2-4 %</td></tr>
+      <tr><td><strong>4. Avis &amp; parrainage</strong></td><td>J14 après livraison, incitation légère</td><td>Preuve sociale → conversion site</td></tr>
+      <tr><td><strong>5. Browse abandonment</strong></td><td>Visite produit sans panier · 24 h</td><td class="num">+1-3 %</td></tr>
+    </table></div>
+    <p class="small">Pilote = flows 1 + 2 uniquement. Les 5 flows = l'étage SYSTÈME. L'écart entre les deux, c'est ton argument d'upsell au jour 60.</p>
+
+    <h3>Process de livraison — 7 jours chrono</h3>
+    <ul class="liste">
+      <li><strong>J1 — Accès &amp; audit :</strong> Klaviyo/Brevo (compte DU CLIENT, jamais le tien), admin boutique en lecture, charte/ton de marque, exports produits. Ton agent d'audit sort l'état des lieux chiffré.</li>
+      <li><strong>J2-3 — Copy :</strong> Claude génère 2-3 variantes par message dans le ton de la marque ; tu sélectionnes et affines ; le client valide en une passe (deadline 24 h annoncée dès J1).</li>
+      <li><strong>J4-5 — Build :</strong> montage des flows, segmentation de base (nouveaux / réguliers / dormants), UTM propres pour l'attribution.</li>
+      <li><strong>J6 — QA :</strong> envois tests sur tous les scénarios, vérif mobile, liens, codes promo.</li>
+      <li><strong>J7 — Mise en ligne + tracking :</strong> dashboard partagé, capture d'écran « point zéro » des revenus flows (ta base de calcul des 15 %).</li>
+    </ul>
+
+    <h3>Ta machine multi-agents (ton PC fixe)</h3>
+    <ul class="liste">
+      <li><strong>Agent Prospection :</strong> enrichit la liste quotidienne, pré-rédige la ligne de personnalisation de chaque DM/email.</li>
+      <li><strong>Agent Audit :</strong> à partir de l'URL + captures, produit le script Loom et le calcul des € qui dorment.</li>
+      <li><strong>Agent Copy :</strong> génère les variantes de flows dans le ton de la marque (brief = 10 lignes).</li>
+      <li><strong>Agent Reporting :</strong> le 1er du mois, transforme l'export CSV Klaviyo en rapport d'une page.</li>
+      <li>Toi = contrôle qualité + relation client. L'IA produit, tu signes. Un client paie ta responsabilité, pas tes prompts.</li>
+    </ul>
+
+    <h3>Le rapport mensuel (1 page, toujours le même format)</h3>
+    <div class="script"><span class="tag">Template</span>[MARQUE] — Rétention · [Mois]
+CA attribué aux flows : X € (soit Y % du CA total)
+vs mois précédent : +Z %
+Meilleur flow : [nom] — X € · Ouverture X % · Clic X %
+Commission (15 %) : X €
+Action du mois prochain : [1 seule action, concrète]</div>
+
+    <div class="action">
+      <span class="tag">À préparer une fois — avant le 1er client</span>
+      <label><input type="checkbox"> Checklist d'onboarding (liste d'accès J1) prête à envoyer.</label>
+      <label><input type="checkbox"> Les 4 agents configurés et testés sur une fausse marque.</label>
+      <label><input type="checkbox"> Un jeu de flows démo (captures) à montrer en call phase 3.</label>
+    </div>
+  </div>
+</section>
+
+<section id="m6">
+  <div class="wrap">
+    <span class="mod">Module 6</span>
+    <h2>Admin, contrat, micro-entreprise</h2>
+    <p class="lead">La partie qu'aucune formation US ne couvre pour la France. Version minimale et propre — pas un cours de droit : vérifie les seuils du moment sur les sources officielles, ils bougent.</p>
+
+    <h3>Micro-entreprise — l'essentiel</h3>
+    <ul class="liste">
+      <li><strong>Création : gratuite</strong>, en ligne sur formalites.entreprises.gouv.fr (guichet unique). Activité : prestations de services / conseil en marketing digital. Compte bancaire dédié dès le début.</li>
+      <li><strong>Cotisations :</strong> un % de ton chiffre encaissé (ordre de grandeur ~21-26 % pour les services — vérifie le taux en vigueur sur autoentrepreneur.urssaf.fr). Déclaration mensuelle ou trimestrielle. Option ACRE possible la 1re année (taux réduit) : demande-la à la création.</li>
+      <li><strong>TVA :</strong> en dessous d'un seuil de CA tu factures sans TVA avec la mention « TVA non applicable, art. 293 B du CGI ». Les seuils ont été modifiés récemment — <strong>vérifie le montant actuel avant ta première facture</strong>, ne te fie à aucun chiffre d'un vieux tuto YouTube.</li>
+      <li><strong>Facture — mentions obligatoires :</strong> ton nom + SIRET, adresse, n° et date de facture, client, détail de la prestation, montant, mention TVA ci-dessus, conditions de paiement. Stripe ou Qonto génèrent ça proprement.</li>
+    </ul>
+
+    <h3>Le contrat pilote — 7 clauses, 1 page</h3>
+    <div class="tablewrap"><table>
+      <tr><th>Clause</th><th>Contenu</th></tr>
+      <tr><td>1. Périmètre</td><td>Les 2 flows précis livrés, sur l'outil du client, sous 7 jours ouvrés après réception des accès.</td></tr>
+      <tr><td>2. Durée</td><td>60 jours à partir de la mise en ligne. Reconduction uniquement par accord écrit (upsell SYSTÈME).</td></tr>
+      <tr><td>3. Rémunération</td><td>490 € HT à la signature + 15 % du CA attribué (déf. clause 4), facturé mensuellement.</td></tr>
+      <tr><td>4. Attribution</td><td>« CA attribué » = revenu rattaché par [Klaviyo/Brevo] aux flows créés par le prestataire, fenêtre d'attribution standard de l'outil. Dashboard accessible aux deux parties.</td></tr>
+      <tr><td>5. Plafond (optionnel)</td><td>Commission plafonnée à [X] € sur la durée du pilote.</td></tr>
+      <tr><td>6. Propriété &amp; accès</td><td>Comptes, listes et flows appartiennent au client. Le prestataire peut citer les résultats anonymisés (ou nommés, si accord) comme référence.</td></tr>
+      <tr><td>7. Résiliation</td><td>Par écrit, 7 jours de préavis. Sommes dues sur le CA attribué jusqu'à la date effective.</td></tr>
+    </table></div>
+    <p class="small">La clause 6 est stratégique : c'est elle qui transforme chaque pilote en case study — ton vrai salaire des 3 premiers mois.</p>
+
+    <div class="action">
+      <span class="tag">À faire — cette semaine</span>
+      <label><input type="checkbox"> Créer la micro-entreprise (30 min, gratuit) + demander l'ACRE.</label>
+      <label><input type="checkbox"> Ouvrir Stripe + un compte dédié.</label>
+      <label><input type="checkbox"> Rédiger le contrat 1 page à partir du tableau (Claude te le met en forme en 5 min).</label>
+    </div>
+  </div>
+</section>
+
+<section id="m7">
+  <div class="wrap">
+    <span class="mod">Module 7</span>
+    <h2>Scaling 0 → 10K → 30K MRR</h2>
+    <p class="lead">La partie « agence » des programmes à 5K : quand monter les prix, quand déléguer, comment le MRR se construit mathématiquement. Pas de magie — des paliers.</p>
+
+    <h3>Les paliers, en chiffres</h3>
+    <div class="tablewrap"><table>
+      <tr><th>Palier</th><th>Composition type</th><th>Calcul</th><th>Condition de passage</th></tr>
+      <tr><td class="num">~5K €/mois</td><td>3 SYSTÈME + 1 PARTENAIRE + 2 setups/mois + perf.</td><td class="num">1 470 + 1 190 + 3 000 ≈ 5 700 €</td><td>3 case studies documentés</td></tr>
+      <tr><td class="num">~10K €/mois</td><td>6 SYSTÈME + 3 PARTENAIRE + 2 setups + perf.</td><td class="num">2 940 + 3 570 + 3 000 + perf ≈ 10K €</td><td>Prix montés (voir dessous) + process M5 rodé</td></tr>
+      <tr><td class="num">~30K €/mois</td><td>~15 clients à retainer moyen 1 500 € + setups à 2 500 €</td><td class="num">22 500 + 5 000 + perf ≈ 30K €</td><td>1-2 personnes en délégation, toi = vente + QC</td></tr>
+    </table></div>
+
+    <h3>Les 4 leviers, dans l'ordre</h3>
+    <ul class="liste">
+      <li><strong>1. Monter les prix (mois 3-4) :</strong> dès 3 case studies → setup 2 500 €, retainer 990-1 500 €, perf. réservée aux gros comptes. Les nouveaux prix ne s'appliquent qu'aux nouveaux clients.</li>
+      <li><strong>2. Parrainage client (mois 3) :</strong> 10 % du retainer pendant 6 mois pour toute marque amenée. Les fondateurs e-com FR se connaissent tous.</li>
+      <li><strong>3. Contenu (mois 3+, PAS avant le 1er client) :</strong> 3 posts/semaine LinkedIn + X : chiffres réels de tes clients, avant/après, leçons. C'est la seule partie « personal branding » de Brez qui vaut quelque chose — et elle ne marche qu'avec de vrais résultats à montrer.</li>
+      <li><strong>4. Déléguer (dès ~8K MRR) :</strong> un freelance intégration/copy à 500-800 €/mois libère 15 h/semaine. Tu gardes : la vente, les rapports, la relation. Tu délègues : le build.</li>
+    </ul>
+
+    <div class="realite">
+      <span class="tag">Le piège du palier 2</span>
+      <p>À ~8-10K MRR, la livraison mange tes journées et la prospection s'arrête → le MRR stagne puis baisse (le churn existe : compte 5-10 %/mois). La solution n'est jamais « travailler plus tard le soir », c'est déléguer le build (levier 4) et protéger le créneau prospection comme un rendez-vous client.</p>
+    </div>
+  </div>
+</section>
+
+<section id="m8">
+  <div class="wrap">
+    <span class="mod">Module 8</span>
+    <h2>Plan 90 jours + KPI</h2>
+    <p class="lead">Ce que la communauté à 5K fournit vraiment : un cadre et des comptes à rendre. Voici le cadre. Les comptes, tu te les rends chaque dimanche soir avec ce tableau, sans exception.</p>
+
+    <h3>Semaine 1 — jour par jour</h3>
+    <div class="tablewrap"><table>
+      <tr><th>Jour</th><th>Actions</th></tr>
+      <tr><td>J1</td><td>10 premiers DM (avant tout le reste) · création micro-entreprise + ACRE · achat des 2 domaines · lancement du warmup Instantly.</td></tr>
+      <tr><td>J2</td><td>Liste : 100 marques qualifiées (M3) · bio Instagram/LinkedIn refaite · 20 DM.</td></tr>
+      <tr><td>J3</td><td>Grille tarifaire 1 page · contrat pilote 1 page · Stripe opérationnel · 20 DM.</td></tr>
+      <tr><td>J4</td><td>Configuration des 4 agents (M5) · 3 premiers audits Loom sur les répondants · 20 DM.</td></tr>
+      <tr><td>J5</td><td>Site une page (positionnement M1 + les 3 offres + ton visage) · 20 DM · 5 Looms.</td></tr>
+      <tr><td>J6-7</td><td>5 calls de simulation avec Claude · préparation des séquences email dans Instantly (envoi à J15, fin du warmup).</td></tr>
+    </table></div>
+
+    <h3>Semaines 2 → 12</h3>
+    <div class="tablewrap"><table>
+      <tr><th>Période</th><th>Focus</th><th>Objectif de sortie</th></tr>
+      <tr><td>S2-3</td><td>Quota quotidien M3 complet (DM seuls jusqu'à J15, puis + email)</td><td class="num">≥ 4 calls réservés</td></tr>
+      <tr><td>S4-6</td><td>Volume + calls. Rien d'autre.</td><td class="num">1er pilote signé ≤ J45</td></tr>
+      <tr><td>S7-9</td><td>Livraison pilote(s) en 7 j chrono · prospection maintenue à 70 %</td><td class="num">2-3 pilotes actifs · 1ers € de perf.</td></tr>
+      <tr><td>S10-12</td><td>Conversion pilotes → SYSTÈME/PARTENAIRE · premiers posts de résultats · demande de parrainages</td><td class="num">2-4K € MRR + 3 case studies</td></tr>
+    </table></div>
+
+    <h3>Le tableau du dimanche soir</h3>
+    <div class="script"><span class="tag">À remplir chaque semaine — 5 minutes, zéro excuse</span>Semaine n° __
+Prospects ajoutés : ___ /350   ·   DM envoyés : ___ /150   ·   Emails : ___ /250
+Réponses : ___   ·   Calls faits : ___   ·   Pilotes signés : ___
+CA encaissé : ___ €   ·   MRR : ___ €
+La chose qui a le plus bloqué : ______
+L'unique priorité de la semaine prochaine : ______</div>
+
+    <h3>Arbre de décision — si 0 client au jour 45</h3>
+    <ul class="liste">
+      <li><strong>Réponses &lt; 2 % (après 300+ envois) :</strong> problème de message ou de cible → réécris l'ouverture autour d'UNE douleur (le panier abandonné), ou change de verticale. Pas d'outil neuf.</li>
+      <li><strong>Des réponses mais 0 call :</strong> problème de preuve → le Loom doit arriver plus tôt dans la séquence ; vérifie que ton profil/site inspire confiance en 5 secondes.</li>
+      <li><strong>Des calls mais 0 close :</strong> problème d'offre ou de script → descends le setup à 0 € + 20 % perf. sur le tout premier client, réécoute tes calls, retravaille la phase 4.</li>
+      <li><strong>Tu n'as pas tenu le quota :</strong> le problème n'est ni l'offre, ni la niche, ni la France. Relis le M0.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="ax">
+  <div class="wrap">
+    <span class="mod">Annexe</span>
+    <h2>Allocation des 4 000 €</h2>
+    <p class="lead">La formation de Brez coûte plus que tout ton capital. Voici ce que le même argent achète quand tu l'exécutes toi-même :</p>
+    <div class="tablewrap"><table>
+      <tr><th>Poste</th><th>6 mois</th><th>Note</th></tr>
+      <tr><td>Micro-entreprise + compte pro</td><td class="num">0 – 60 €</td><td>Création gratuite ; certains comptes pro sont gratuits.</td></tr>
+      <tr><td>Domaines + boîtes mail</td><td class="num">~110 €</td><td>2 domaines + 2 boîtes.</td></tr>
+      <tr><td>Instantly (warmup + envoi)</td><td class="num">~240 €</td><td>Plan de base suffisant à ton volume.</td></tr>
+      <tr><td>Données (Store Leads) + enrichissement</td><td class="num">~300 – 480 €</td><td>Réductible à ~0 € en full manuel les 2 premiers mois.</td></tr>
+      <tr><td>Claude (copy, agents, audits)</td><td class="num">~180 – 360 €</td><td>Ton principal outil de production.</td></tr>
+      <tr><td>Divers (Loom, Stripe, site)</td><td class="num">~100 €</td><td>Presque tout existe en gratuit.</td></tr>
+      <tr class="total"><td>Total burn 6 mois</td><td class="num">≈ 1 000 – 1 350 €</td><td>Runway restant : ~2 650 – 3 000 € de réserve.</td></tr>
+    </table></div>
+    <ul class="liste">
+      <li><strong>La réserve ne se dépense pas</strong> en gadgets, en pubs pour toi-même (interdit avant 10K MRR), ni en formation supplémentaire. Elle sert à : imprévus, premier freelance (M7), et dormir tranquille.</li>
+      <li>Point d'équilibre : <strong>1 seul pilote signé rembourse ~3 mois d'outils.</strong> C'est toute la différence avec un modèle qui exige un budget ads.</li>
+    </ul>
+
+    <div class="action">
+      <span class="tag">Le seul module qui compte vraiment</span>
+      <label><input type="checkbox"> Les 10 premiers DM sont partis aujourd'hui.</label>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:var(--or)">LE SYSTÈME</strong> — manuel d'opérations rédigé pour Mo$, juillet 2026. Contenu 100 % original : mêmes fondamentaux que les programmes payants (positionnement, outreach, closing, delivery, scaling), zéro contenu copié.</p>
+    <p class="small">Chiffres légaux et fiscaux à vérifier sur autoentrepreneur.urssaf.fr et economie.gouv.fr avant ta première facture. Les métriques d'outreach sont des fourchettes réalistes, pas des promesses — ta seule variable de contrôle reste le volume exécuté.</p>
+  </div>
+</footer>
+
+</body>
+</html>
